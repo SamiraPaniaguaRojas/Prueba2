@@ -1,0 +1,69 @@
+<table>
+  <tbody>
+    <tr id="fila1">
+      <td></td>
+      <td></td>
+    </tr>
+    <tr id="fila2">
+      <td></td>
+      <td></td>
+    </tr>
+    ...
+    <tr id="fila20">
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+Pero tú necesitas que los ID vayan en orden descendente: fila20, fila19, ..., fila1. Eso no lo puedes hacer directamente con Emmet, así que lo ajustamos manualmente o con JavaScript.
+
+✅ 2. JavaScript para poner IDs descendentes y actualizar valores aleatoriamente
+Aquí tienes el código completo en HTML con JavaScript incluido:
+
+html
+Copiar
+Editar
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabla con Filas Descendentes</title>
+</head>
+<body>
+  <table border="1">
+    <tbody id="tabla">
+      <!-- Las filas se generarán dinámicamente -->
+    </tbody>
+  </table>
+
+  <script>
+    const tbody = document.getElementById('tabla');
+
+    // Crear 20 filas con id descendente: fila20, fila19, ..., fila1
+    for (let i = 20; i >= 1; i--) {
+      const tr = document.createElement('tr');
+      tr.id = `fila${i}`;
+
+      const td1 = document.createElement('td');
+      const td2 = document.createElement('td');
+
+      // Generar valores aleatorios del 1 al 100
+      td1.textContent = Math.floor(Math.random() * 100) + 1;
+      td2.textContent = Math.floor(Math.random() * 100) + 1;
+
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tbody.appendChild(tr);
+    }
+
+    // Opcional: actualizar cada fila cada cierto tiempo
+    setInterval(() => {
+      for (let i = 20; i >= 1; i--) {
+        const fila = document.getElementById(`fila${i}`);
+        fila.children[0].textContent = Math.floor(Math.random() * 100) + 1;
+        fila.children[1].textContent = Math.floor(Math.random() * 100) + 1;
+      }
+    }, 3000); // Actualiza cada 3 segundos
+  </script>
+</body>
+</html>
